@@ -60,11 +60,11 @@ final switch (x)
         break
 ```
 
-  This issue can be overcome by placing extra braces:
+  This issue can be overcome (at some extent) by placing extra braces:
 
 ```d
 struct Thing {
-nothrow pure @safe @nogc:
+nothrow pure @safe @nogc
     //...
 }
 ```
