@@ -27,10 +27,10 @@ void main() {
         ;
     //  ^ So is this one.
 
-        auto a = [myPoint];
-        a.each!dg();
-        assert(myPoint.x == 0);
-        assert(a[0].x == 1);
+        auto a = [myPoint]
+        a.each!dg()
+        assert(myPoint.x == 0)
+        assert(a[0].x == 1)
     };
     test!q{
         //Valid yet weird.
