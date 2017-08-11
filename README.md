@@ -102,7 +102,7 @@ pure @safe
 ```
 
 `dythonize` processes source code passed as an argument and `dythonizeFile` string-`import`s a file
-with the given name. Both may be asked to return a `char[ ]` instead of `string`:
+with a given name. Both may be asked to return a `char[ ]` instead of `string`:
 
 ```d
 //`enum` to force compile-time evaluation.
@@ -114,20 +114,21 @@ char[ ] contents = dythonizeFile!(char[ ], "contents.dy");
 How it works
 ------------
 
-The parser is intentionally kept quite simple to make it faster. It follows a few rules:
+The parser is intentionally kept quite simple to make it faster. It follows few rules:
 
 1. If the indentation increases, a brace is opened on the previous line, unless it ends with one of
    `=>,\{`.
 2. If the indentation decreases or stays consistent, a semicolon is appended to the previous line,
    unless it ends with one of `=>,:;\{}`, and then needed amount of braces are closed.
 3. `\` is erased from the resulting code.
-4. Code rewriting is disabled in parentheses and brackets and re-enabled in user-placed braces.
+4. Code rewriting is disabled inside parentheses and brackets and re-enabled inside user-placed
+   braces.
 
 Of course, comments and strings are properly skipped.
 
-Dython passes the [three-stage bootstrapping][dython3] (a standard self-hosting compiler stress
-test), so the possibility of a nasty bug in it is rather small. Some [sed scripting][preprocess.sh]
-is required to turn it into a self-hosting one, though.
+Dython passes [three-stage bootstrapping][dython3] (a standard self-hosting compiler stress test),
+so the possibility of a nasty bug in it is rather small. Some [sed scripting][preprocess.sh] is
+required to turn it into a self-hosting one, though.
 
 [dython3]:       https://github.com/SirNickolas/Dython/blob/master/test/dython3.d
 [preprocess.sh]: https://github.com/SirNickolas/Dython/blob/master/test/preprocess.sh
