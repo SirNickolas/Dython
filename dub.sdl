@@ -1,0 +1,17 @@
+name        "dython"
+description "D code preprocessor that adds significant whitespace support."
+authors     "Nickolay Bukreyev"
+copyright   "Copyright © 2017, Nickolay Bukreyev"
+license     "MIT"
+
+configuration "library" {
+    targetType "sourceLibrary"
+}
+
+configuration "unittest" {
+    targetType "executable"
+    sourcePaths "test"
+    importPaths "test"
+
+    preBuildCommands "sh test/preprocess.sh"
+}
