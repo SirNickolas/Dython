@@ -4,6 +4,8 @@ authors     "Nickolay Bukreyev"
 copyright   "Copyright © 2017, Nickolay Bukreyev"
 license     "MIT"
 
+toolchainRequirements frontend=">=2.072"
+
 configuration "library" {
     targetType "sourceLibrary"
 }
@@ -13,5 +15,5 @@ configuration "unittest" {
     sourcePaths "test"
     importPaths "test"
 
-    preBuildCommands "sh test/preprocess.sh"
+    preBuildCommands "sed -Ef test/preprocess.sed src/dython.d >views/dython.dy"
 }

@@ -127,11 +127,11 @@ The parser is intentionally kept quite simple to make it faster. It follows few 
 Of course, comments and strings are properly skipped.
 
 Dython passes [three-stage bootstrapping][dython3] (a standard self-hosting compiler stress test),
-so the possibility of a nasty bug in it is rather small. Some [sed scripting][preprocess.sh] is
+so the possibility of a nasty bug in it is rather small. Some [Sed scripting][preprocess.sed] is
 required to turn it into a self-hosting one, though.
 
-[dython3]:       https://github.com/SirNickolas/Dython/blob/master/test/dython3.d
-[preprocess.sh]: https://github.com/SirNickolas/Dython/blob/master/test/preprocess.sh
+[dython3]:        https://github.com/SirNickolas/Dython/blob/master/test/dython3.d
+[preprocess.sed]: https://github.com/SirNickolas/Dython/blob/master/test/preprocess.sed
 
 
 Conclusion
