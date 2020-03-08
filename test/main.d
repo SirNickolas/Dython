@@ -54,10 +54,10 @@ void main() {
             //We need to go deeper!
             auto y = test!q{
                 return 123
-            };
+            }
             assert(y == 123)
             return y + 1
-        };
+        }
         assert(x == 124)
     };
     test!q{

@@ -141,7 +141,7 @@ struct Parser {
             } else
                 indentChar = cast(char)c;//Remember the first seen whitespace character in the file.
             const temp = s;
-            s = s[1 .. $].find!`a != b`(indentChar);
+            s = s[1 .. $].find!q{a != b}(indentChar);
             if (!s.empty && s.front.among!(' ', '\t'))
                 sink ~= mixedIndentationError;
             block.curLineIndentation = cast(int)(temp.length - s.length);
@@ -419,19 +419,19 @@ struct Parser {
                 bol = false;
             } else
                 switch (c) {
-                    case ' ': case '\t': case '\v': case '\f':
+                    case ' ', '\t', '\v', '\f':
                         break;
 
-                    case '\n': case '\r': case '\u2028': case '\u2029':
+                    case '\n', '\r', '\u2028', '\u2029':
                         processNewline();
                         processSignificantWhitespace();
                         break;
 
-                    case ',': case '=': case '>':
+                    case ',', '=', '>':
                         processSeparator();
                         break;
 
-                    case ':': case ';':
+                    case ':', ';':
                         processTerminator();
                         break;
 
@@ -439,11 +439,11 @@ struct Parser {
                         processBackslash();
                         break;
 
-                    case '(': case '[':
+                    case '(', '[':
                         processParen();
                         break;
 
-                    case ')': case ']':
+                    case ')', ']':
                         processCloseParen();
                         break;
 
@@ -475,7 +475,7 @@ struct Parser {
                         processHash();
                         break;
 
-                    case '\0': case '\x1A'://Treated as EOF.
+                    case '\0', '\x1A'://Treated as EOF.
                         checkpoint.length -= s.length;//Trim the source.
                         break parseLoop;
 
@@ -490,7 +490,7 @@ struct Parser {
         sink ~= checkpoint;
         if (now == Emit.everything)
             sink ~= ';';
-        sink ~= repeat('}', bTop + sum(blocks[0 .. bTop + 1].map!`a.lTop`));
+        sink ~= repeat('}', bTop + sum(blocks[0 .. bTop + 1].map!q{a.lTop}));
         return sink.data;
     }
 }
